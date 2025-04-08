@@ -1,0 +1,22 @@
+.get_cat_container {
+    width: 350px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.warn_message_shown{
+    color: red;
+}
+
+.warn_message_hided {
+    display: none;
+}
+
+.cat_image {
+    max-width: 600px;
+    max-height: 600px;
+    border-radius: 15px;
+}
