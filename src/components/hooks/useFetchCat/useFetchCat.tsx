@@ -9,8 +9,10 @@ interface Cat {
 
 const useFetchCat = (refresh: boolean, enabled: boolean) => {
     const [cat, setCat] = useState<Cat[] | null>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const fetchCat = async () => {
+        setIsLoading(true);
         const API = 'https://api.thecatapi.com/v1/images/search';
         const response = await fetch(API)
         try {
@@ -20,18 +22,20 @@ const useFetchCat = (refresh: boolean, enabled: boolean) => {
         catch (error) {
             console.log('failed to fetch', error)
         }
+        finally {
+            setIsLoading(false);
+        }
     }
 
     useEffect(() => {
-        if (!refresh || !enabled) return 
+        if (!refresh || !enabled) return
         const getCats = setInterval(() => {
-                console.log('Я включился', refresh, enabled)
-                fetchCat()
-            }, 5000)
+            fetchCat()
+        }, 5000)
         return () => clearInterval(getCats)
     }, [refresh, enabled])
 
-    return {cat, fetchCat }
+    return { cat, isLoading, fetchCat }
 
 }
 

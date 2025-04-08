@@ -1,19 +1,24 @@
 import catWebp from '@/assets/image/flbcWebp.webp';
 import catPng from '@/assets/image/flbcpng.png';
 
+import s from './ImageComponent.module.scss'
+
 interface ImageComponentProps {
     source: string | null,
     className: string,
     description: string,
+    onLoad: ()=> void,
+    imageStatus: boolean,
 }
 
-const ImageComponent = ({ source, className, description }: ImageComponentProps) => {
+const ImageComponent = ({ source, className, description, onLoad, imageStatus}: ImageComponentProps) => {
     return (
-        <div>
-            {source ? <img className={className} src={source} alt={description} /> :
+        <div className={s.image_container}>
+            {imageStatus ? null: <div className={s.loading_hider}/>}
+            {source ? <img onLoad={onLoad} className={className} src={source} alt={description} /> :
                 <picture>
                     {catWebp ? <source type="image/webp" srcSet={catWebp} /> : null}
-                    <img className={className} src={catPng} alt={description} />
+                    <img onLoad={onLoad} className={className} src={catPng} alt={description} />
                 </picture>
             }
 

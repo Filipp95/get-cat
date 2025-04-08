@@ -17,10 +17,13 @@ const GetCatLayout = () => {
     const [enabled, setEnabled] = useState<boolean>(true)
     const [refresh, setRefresh] = useState<boolean>(false)
     const [warnMessage, setWarnMessage] = useState<boolean>(false)
-    const {cat, fetchCat} = useFetchCat(refresh, enabled)
+    const [imageStatus, setImageStatus] = useState<boolean>(false)
+
+    const { cat, isLoading, fetchCat } = useFetchCat(refresh, enabled)
 
     const handleCheckEnabled = ({ enabled }: HandleClickButtonProps) => {
         if (enabled) {
+            setImageStatus(false)
             fetchCat()
         }
         else setWarnMessage(true)
@@ -39,9 +42,12 @@ const GetCatLayout = () => {
     return (
         <div className={s.get_cat_container}>
             <CheckBoxWidget enabled={enabled} refresh={refresh} handleEnabled={handleEnabled} handleRefresh={handleRefresh} />
-            <Button colorPalette="blue" onClick={() => { handleCheckEnabled({ enabled }) }}>Get Cat</Button>
+            <Button colorPalette="blue" disabled={refresh} loading={isLoading} loadingText="Load Cat..." onClick={() => { handleCheckEnabled({ enabled })}}>
+                Get Cat
+            </Button>
             <div className={warnMessage ? s.warn_message_shown : s.warn_message_hided}>You should click "Enable" to Get New Cat</div>
-            <ImageComponent source={cat && cat.length > 0 ? cat[0].url : null} description={'Изображение кошки'} className={s.cat_image} />
+            <ImageComponent imageStatus={imageStatus} onLoad={()=>setImageStatus(true)} source={cat && cat.length > 0 ? cat[0].url : null}
+             description={'Незагруженное изображение кошки'}  className={s.cat_image}/>
         </div>
     )
 }
