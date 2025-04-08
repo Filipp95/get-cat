@@ -1,13 +1,13 @@
 import s from './CheckBoxWidget.module.scss'
 
-interface CheckBoxButtonProps {
+interface CheckBoxWidgetProps {
     enabled: boolean,
     refresh: boolean,
     handleEnabled: (enabled: boolean) => void,
     handleRefresh: (refresh: boolean) => void,
 }
 
-const CheckBoxButton = ({ enabled, refresh, handleEnabled, handleRefresh }: CheckBoxButtonProps) => {
+const CheckBoxWidget = ({ enabled, refresh, handleEnabled, handleRefresh }: CheckBoxWidgetProps) => {
     return (
         <div >
             <form className={s.checkbox_container}>
@@ -25,4 +25,4 @@ const CheckBoxButton = ({ enabled, refresh, handleEnabled, handleRefresh }: Chec
 
 }
 
-export default CheckBoxButton
+export default CheckBoxWidget

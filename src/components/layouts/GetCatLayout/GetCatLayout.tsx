@@ -1,4 +1,4 @@
-import CheckBoxButton from '@/components/widgets/CheckBoxWidget/CheckBoxWidget';
+import CheckBoxWidget from '@/components/widgets/CheckBoxWidget/CheckBoxWidget';
 import ImageComponent from '@/components/elements/ImageComponent/ImageComponent';
 
 import useFetchCat from '@/components/hooks/useFetchCat/useFetchCat';
@@ -38,7 +38,7 @@ const GetCatLayout = () => {
 
     return (
         <div className={s.get_cat_container}>
-            <CheckBoxButton enabled={enabled} refresh={refresh} handleEnabled={handleEnabled} handleRefresh={handleRefresh} />
+            <CheckBoxWidget enabled={enabled} refresh={refresh} handleEnabled={handleEnabled} handleRefresh={handleRefresh} />
             <Button colorPalette="blue" onClick={() => { handleCheckEnabled({ enabled }) }}>Get Cat</Button>
             <div className={warnMessage ? s.warn_message_shown : s.warn_message_hided}>You should click "Enable" to Get New Cat</div>
             <ImageComponent source={cat && cat.length > 0 ? cat[0].url : null} description={'Изображение кошки'} className={s.cat_image} />
