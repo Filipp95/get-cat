@@ -22,9 +22,6 @@ const useFetchCat = (refresh: boolean, enabled: boolean) => {
         catch (error) {
             console.log('failed to fetch', error)
         }
-        finally {
-            setIsLoading(false);
-        }
     }
 
     useEffect(() => {
@@ -35,7 +32,7 @@ const useFetchCat = (refresh: boolean, enabled: boolean) => {
         return () => clearInterval(getCats)
     }, [refresh, enabled])
 
-    return { cat, isLoading, fetchCat }
+    return { cat, isLoading, fetchCat, setIsLoading }
 
 }
 

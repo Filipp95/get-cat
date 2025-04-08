@@ -7,18 +7,18 @@ interface ImageComponentProps {
     source: string | null,
     className: string,
     description: string,
-    onLoad: ()=> void,
+    handleImageLoad: ()=> void,
     imageStatus: boolean,
 }
 
-const ImageComponent = ({ source, className, description, onLoad, imageStatus}: ImageComponentProps) => {
+const ImageComponent = ({ source, className, description, handleImageLoad, imageStatus}: ImageComponentProps) => {
     return (
         <div className={s.image_container}>
             {imageStatus ? null: <div className={s.loading_hider}/>}
-            {source ? <img onLoad={onLoad} className={className} src={source} alt={description} /> :
+            {source ? <img onLoad={handleImageLoad} className={className} src={source} alt={description} /> :
                 <picture>
                     {catWebp ? <source type="image/webp" srcSet={catWebp} /> : null}
-                    <img onLoad={onLoad} className={className} src={catPng} alt={description} />
+                    <img onLoad={handleImageLoad} className={className} src={catPng} alt={description} />
                 </picture>
             }
 
